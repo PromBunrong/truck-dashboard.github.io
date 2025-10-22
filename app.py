@@ -13,13 +13,13 @@ GID_ACTION      = "0"  # tab with Action/Status
 CSV_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}/export?format=csv&gid={GID_ACTION}"
 
 # ====== 1) REFRESH CONTROLS ======
-# Auto-refresh every 60s (adjust as you like)
-# --- Auto-refresh every 60 seconds ---
+# Auto-refresh every 30s (adjust as you like)
+# --- Auto-refresh every 30 seconds ---
 
 
-auto = st.sidebar.checkbox("Auto-refresh (60 s)", value=False)
+auto = st.sidebar.checkbox("Auto-refresh (30 s)", value=False)
 if auto:
-    count = st_autorefresh(interval=60_000, key="datarefresh")  # refresh every 60 s
+    count = st_autorefresh(interval=30_000, key="datarefresh")  # refresh every 30 s
 
 
 # Manual refresh button
@@ -27,7 +27,7 @@ if st.sidebar.button("🔄 Refresh now"):
     st.cache_data.clear()
 
 # ====== 2) LOAD DATA ======
-@st.cache_data(ttl=60)  # refetch at most once per minute
+@st.cache_data(ttl=30)  # refetch at most once per minute
 def load_action():
     df = pd.read_csv(CSV_URL)
     # rename if needed
